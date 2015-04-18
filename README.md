@@ -22,7 +22,7 @@ please check out:
 - [Why every LED light should be using HSI colorspace.](http://blog.saikoled.com/post/43693602826/why-every-led-light-should-be-using-hsi)
 - [How to convert from HSI to RGB+white.](http://blog.saikoled.com/post/44677718712/how-to-convert-from-hsi-to-rgb-white)
 - [Implementing arbitrary color correction with the myki!](http://blog.saikoled.com/post/45630908157/implementing-arbitrary-color-correction-with-the)
-- [Talk about HSI Colorspace and RGBW](http://blog.saikoled.com/post/71708131057/talk-about-hsi-colorspace-and-rgbw
+- [Talk about HSI Colorspace and RGBW](http://blog.saikoled.com/post/71708131057/talk-about-hsi-colorspace-and-rgbw)
 
 If you are curious about our other projects, you can visit our [blog](http://blog.saikoled.com).
 
