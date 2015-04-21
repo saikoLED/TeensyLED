@@ -1,7 +1,6 @@
 TeensyLED Controller
 ====================
-Copyright Brian Neltner 2015
-
+Copyright Brian Neltner 2015<br/>
 Version 0.3 - April 21, 2015
 
 Summary
@@ -61,7 +60,17 @@ Hardware Performance
 --------------------
 Simulations have been done on the current sinking circuitry in order to optimize the response time and stability, but tests on real hardware have not yet been done. Simulations were done using LTSpice and the vendor supplied model for the ZXT1053AK. These simulations are limited in predicting real performance, particularly in the realm of thermal issues.
 
+###Circuit Model
 ![Circuit Schematic](Simulations/tuned RCTL circuit.png)
+
+###Current Output with 1μs pulse.
+![1μs Pulse Width](Simulations/tuned RCTL circuit 1us pulse.png)
+
+###Current Output with 100ns pulse.
+![100ns Pulse Width](Simulation/tuned RCTL circuit 100ns pulse.png)
+
+###Estimated current load from controller pin.
+![Drive Current](Simulation/tuned RCTL circuit drive current.png)
 
 Major Hardware Limitations
 --------------------------
