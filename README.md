@@ -1,6 +1,7 @@
 TeensyLED Controller
 ====================
 Copyright Brian Neltner 2015
+
 Version 0.3 - April 21, 2015
 
 Summary
@@ -55,6 +56,12 @@ as open hardware under the same license as this software.
   - MISO/MOSI/SCK/CS for SPI
 - Separate ground pours were used for the power ground, digital ground,
 and DMX ground.
+
+Hardware Performance
+--------------------
+Simulations have been done on the current sinking circuitry in order to optimize the response time and stability, but tests on real hardware have not yet been done. Simulations were done using LTSpice and the vendor supplied model for the ZXT1053AK. These simulations are limited in predicting real performance, particularly in the realm of thermal issues.
+
+![Circuit Schematic](Simulations/tuned RCTL circuit.png)
 
 Major Hardware Limitations
 --------------------------
