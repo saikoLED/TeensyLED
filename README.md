@@ -67,10 +67,10 @@ Simulations have been done on the current sinking circuitry in order to optimize
 ![1μs Pulse Width](Simulations/tuned RCTL circuit 1us pulse.png)
 
 ###Current Output with 100ns pulse.
-![100ns Pulse Width](Simulation/tuned RCTL circuit 100ns pulse.png)
+![100ns Pulse Width](Simulations/tuned RCTL circuit 100ns pulse.png)
 
 ###Estimated current load from controller pin.
-![Drive Current](Simulation/tuned RCTL circuit drive current.png)
+![Drive Current](Simulations/tuned RCTL circuit drive current.png)
 
 Major Hardware Limitations
 --------------------------
