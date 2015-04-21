@@ -3,8 +3,6 @@ TeensyLED Controller
 Copyright Brian Neltner 2015<br/>
 Version 0.3 - April 21, 2015
 
-![Board Image](Eagle Design/TeensyLED.png)
-
 Summary
 -------
 This provides a basic library and example code for interacting
@@ -12,6 +10,8 @@ with a RGBW LED light using Hue, Saturation, and Intensity (HSI)
 mode. This version has been updated to match the pinout of the RGBW
 driver board provided in the associated Eagle Design files included
 in this repository.
+
+![Board Image](Eagle Design/TeensyLED.png)
 
 Software Features
 -----------------
