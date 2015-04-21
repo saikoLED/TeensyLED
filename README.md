@@ -3,6 +3,8 @@ TeensyLED Controller
 Copyright Brian Neltner 2015<br/>
 Version 0.3 - April 21, 2015
 
+![Board Image](Eagle Design/TeensyLED.png)
+
 Summary
 -------
 This provides a basic library and example code for interacting
