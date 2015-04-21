@@ -1,7 +1,7 @@
 TeensyLED Controller
 ====================
 Copyright Brian Neltner 2015
-Version 0.2 - April 13, 2015
+Version 0.3 - April 21, 2015
 
 Summary
 -------
@@ -37,9 +37,9 @@ as open hardware under the same license as this software.
 - Header to switch polarity of DMX signal for compatibility.
 - Accessible slider switch for connecting 120 ohm termination resistor.
 - 4x 700mA BJT based current sinks (670-730mA typical).
-- Current sinks capable of driving 700mA at up to 100nm pulse width.
-- 100nm pulse width allows 16-bit PWM at 150Hz, or 8-bit PWM at 39kHz.
-- 5-48VDC board compatibility, with the Vin routed directly to LED V+.
+- Current sinks capable of driving 700mA with 100ns rise time, with significant current driven in a shorter time.
+- 100nm pulse width allows 16-bit PWM at 150Hz, or 8-bit PWM at 39kHz. 16-bit PWM possible at 300Hz, or 8-bit PWM at 78kHz, with minor nonlinearity for PWM values of 1. See Simulations directory for more detail on theoretical performance.
+- 5-24VDC board compatibility, with the Vin routed directly to LED V+. Up to 5A allowed by CP-202AH-ND barrel plug connector. Voltage limit is due to barrel plug connector, up to 48VDC can be wired directly using the available test point.
 - Built in high efficiency switching regulator to provide 3.7VDC.
 - Designed to fit into Hammond 1455C801 Extruded Aluminum Enclosure.
 - Solder lugs compatible with Keystone 5016 test points for:
@@ -48,9 +48,11 @@ as open hardware under the same license as this software.
   - VCC (voltage from 3.7V supply)
   - GND (ground for digital ICs)
   - VISO (isolated 3.3V for DMX)
+  - GISO (isolated DMX ground)
   - DAC (12-bit Teensy 3.1 DAC output)
-  - A0-A1 (2 10-bit ADCs)
-  - A2 (1 10-bit ADC also usable for capacitive touch sensors)
+  - A0-A1 (2x 10-bit ADCs)
+  - A2-A3 (2x 10-bit ADC also usable for capacitive touch sensors)
+  - MISO/MOSI/SCK/CS for SPI
 - Separate ground pours were used for the power ground, digital ground,
 and DMX ground.
 
@@ -81,6 +83,8 @@ generally being inappropriate for such high speed PWM capabilities.
     non-functional. As yet untested.
   - May put enough noise onto the power supply so as to severly
     hinder normal operation.
+- No protection diode for reverse voltage protection at V+!
+- No inductor to reduce radiation onto input power.
 - The best design practices I know for managing these I have used, but
 I am not an EE, I only play one on TV sometimes.
 
