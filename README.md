@@ -31,6 +31,8 @@ Hardware Features
 Targeted features in this Eagle Board design, which is also released
 as open hardware under the same license as this software.
 
+[Schematics and Board Drawings](Eagle Design/TeensyLED.pdf)
+
 - Teensy 3.1 socket.
 - RJ45-based DMX Connectors as per DMX-512A.
 - Fully isolated DMX-compatible RS485 Interface (ADM2582E).
