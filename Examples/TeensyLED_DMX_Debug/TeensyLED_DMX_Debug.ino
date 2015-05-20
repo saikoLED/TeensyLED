@@ -1,6 +1,6 @@
 //**************************************************************************
 //
-// TeensyLED Controller
+// TeensyLED Controller DMX Debug
 // Copyright Brian Neltner 2015
 // Version 0.2 - April 18, 2015
 //
@@ -38,7 +38,7 @@
 #define propgain 0.001
 
 // Redpin, Greenpin, Bluepin, Whitepin, Resolution, Frequency.
-RGBWLamp lamp(6, 22, 23, 9, 16, 732);
+RGBWLamp lamp(6, 22, 23, 9, 16, 183.106);
 
 // Define DMX Device.
 DmxReceiver dmx;
@@ -50,28 +50,29 @@ float targetsaturation;
 
 void setup() {
   Serial.begin(115200);
+  lamp.begin();
   dmx.begin();
   dmxTimer.begin(dmxTimerISR, 1000);
   
-  targethue = 0;
-  targetsaturation = 0.75;
+//  targethue = 0;
+//  targetsaturation = 0.75;
   
   // Initialize light at the target hue, no brightness, fully saturated.
-  lamp.setHue(targethue);
-  lamp.setIntensity(0);
-  lamp.setSaturation(targetsaturation);
-  lamp.setColor();
+//  lamp.setHue(targethue);
+//  lamp.setIntensity(0);
+//  lamp.setSaturation(targetsaturation);
+//  lamp.setColor();
   
   // Startup Routine.
-  while (lamp.getIntensity() < 1) {
-    lamp.setIntensity(lamp.getIntensity()+0.001);
-    updatetargethue();
-    updatetargetsaturation();
-    lamp.setHue(lamp.getHue() + propgain*(targethue - lamp.getHue()));
-    lamp.setSaturation(lamp.getSaturation() + propgain*(targetsaturation - lamp.getSaturation()));
-    lamp.setColor();
-    delay(1);
-  }
+//  while (lamp.getIntensity() < 0.1) {
+//    lamp.setIntensity(lamp.getIntensity()+0.001);
+//    updatetargethue();
+//    updatetargetsaturation();
+//    lamp.setHue(lamp.getHue() + propgain*(targethue - lamp.getHue()));
+//    lamp.setSaturation(lamp.getSaturation() + propgain*(targetsaturation - lamp.getSaturation()));
+//    lamp.setColor();
+//    delay(1);
+//  }
 }
 
 elapsedMillis elapsed;
@@ -81,14 +82,14 @@ void loop() {
     Serial.println("New DMX Frame.");
   }
   
-  if (elapsed > 5) {
-    updatetargethue();
-    updatetargetsaturation();
-    lamp.setHue(lamp.getHue() + propgain*(targethue - lamp.getHue()));
-    lamp.setSaturation(lamp.getSaturation() + propgain*(targetsaturation - lamp.getSaturation()));
-    lamp.setColor();
-    elapsed -= 5;
-  }
+//  if (elapsed > 5) {
+//    updatetargethue();
+//    updatetargetsaturation();
+//    lamp.setHue(lamp.getHue() + propgain*(targethue - lamp.getHue()));
+//    lamp.setSaturation(lamp.getSaturation() + propgain*(targetsaturation - lamp.getSaturation()));
+//    lamp.setColor();
+//    elapsed -= 5;
+//  }
 }
 
 void updatetargethue() {
