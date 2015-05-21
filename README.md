@@ -1,15 +1,14 @@
 TeensyLED Controller
 ====================
 Copyright Brian Neltner 2015<br/>
-Version 0.3 - April 21, 2015
+Version 0.4 - May 21, 2015
 
 Summary
 -------
 This provides a basic library and example code for interacting
 with a RGBW LED light using Hue, Saturation, and Intensity (HSI)
-mode. This version has been updated to match the pinout of the RGBW
-driver board provided in the associated Eagle Design files included
-in this repository.
+mode. Also provided are a basic USB interface example, and an example
+for using the fully isolated DMX interface.
 
 ![Board Image](Eagle Design/TeensyLED.png)
 
@@ -17,7 +16,8 @@ Software Features
 -----------------
 - HSI to RGBW library for interacting with LED sources with color correction.
 - PID based fader that follows a random walk through colorspace.
-- Outline (totally untested) start of DMX receiving software.
+- Tested basic DMX receiving software (just prints DMX data to USB Serial port for now).
+- Basic debug example to set the brightness from the USB port.
 
 For more information about the HSI Colorspace developed by SaikoLED
 please check out:
@@ -39,30 +39,19 @@ as open hardware under the same license as this software.
 - RJ45-based DMX Connectors as per DMX-512A.
 - Fully isolated DMX-compatible RS485 Interface (ADM2582E).
 - Header to switch polarity of DMX signal for compatibility.
-- Accessible slider switch for connecting 120 ohm termination resistor.
 - 4x 700mA BJT based current sinks (670-730mA typical).
-- Current sinks capable of driving 700mA with 100ns rise time, with significant current driven in a shorter time.
-- 100nm pulse width allows 16-bit PWM at 150Hz, or 8-bit PWM at 39kHz. 16-bit PWM possible at 300Hz, or 8-bit PWM at 78kHz, with minor nonlinearity for PWM values of 1. See Simulations directory for more detail on theoretical performance.
+- Current sinks capable of driving 700mA with 75ns pulse widths.
+- 75nm pulse width allows 16-bit PWM at 183Hz, or 8-bit PWM at very fast. 16-bit PWM possible at higher PWM frequencies, but with increased non-linearity for low codes. See Simulations directory for more detail on theoretical performance.
 - 5-24VDC board compatibility, with the Vin routed directly to LED V+. Up to 5A allowed by CP-202AH-ND barrel plug connector. Voltage limit is due to barrel plug connector, up to 48VDC can be wired directly using the available test point.
 - Built in high efficiency switching regulator to provide 3.7VDC.
 - Designed to fit into Hammond 1455C801 Extruded Aluminum Enclosure.
-- Solder lugs compatible with Keystone 5016 test points for:
-  - V+ (voltage to the board)
-  - GNDA (ground to the board)
-  - VCC (voltage from 3.7V supply)
-  - GND (ground for digital ICs)
-  - VISO (isolated 3.3V for DMX)
-  - GISO (isolated DMX ground)
-  - DAC (12-bit Teensy 3.1 DAC output)
-  - A0-A1 (2x 10-bit ADCs)
-  - A2-A3 (2x 10-bit ADC also usable for capacitive touch sensors)
-  - MISO/MOSI/SCK/CS for SPI
-- Separate ground pours were used for the power ground, digital ground,
-and DMX ground.
+- 8-pin expansion header to access 3.3V, GND, DAC, A0 (SCK), A1/A2 (Touch), and DIN/DOUT (SPI/USART).
+- PTC Fuse to prevent damage from shorts or over-power.
+- Reverse protection diodes on power inlet and flyback diodes on each LED output to prevent reverse bias.
 
 Hardware Performance
 --------------------
-Simulations have been done on the current sinking circuitry in order to optimize the response time and stability, but tests on real hardware have not yet been done. Simulations were done using LTSpice and the vendor supplied model for the ZXT1053AK. These simulations are limited in predicting real performance, particularly in the realm of thermal issues.
+Simulations have been done on the current sinking circuitry in order to optimize the response time and stability, and real measurements demonstrate comparable performance. Simulations were done using LTSpice and the vendor supplied model for the ZXT1053AK. These simulations are limited in predicting real performance, particularly in the realm of thermal issues.
 
 ###Circuit Model
 ![Circuit Schematic](Simulations/tuned RCTL circuit.png)
@@ -78,8 +67,8 @@ Simulations have been done on the current sinking circuitry in order to optimize
 
 Major Hardware Limitations
 --------------------------
-- Heat dissipation at the BJTs is severe, with switching regulators
-generally being inappropriate for such high speed PWM capabilities.
+- Heat dissipation at the BJTs is the primary limiting factor on maximum power. Switching regulators
+are unfortunately inappropriate for such high speed PWM capabilities.
   - Although the BJTs chosen are rated to 4.4W each, at 700mA and a
     typical minimum drop from the top of the BJT to ground of 3V for
     good regulation, power dissipation throughout the board is likely
@@ -95,18 +84,9 @@ generally being inappropriate for such high speed PWM capabilities.
     down the voltage at the top of the LEDs to the minimum needed
     for reliable regulation based on feedback, but this is a work in
     progress. Perhaps for version 2.0.
-- High current and high frequency PWM may radiate excessively for FCC.
-- High current and frequency PWM may introduce noise issues into board.
-  - May severely degrade ADC measurements, especially from high-
+- High current and high frequency PWM may radiate excessively for FCC. There is a ferrite bead to improve FCC compatibility, but the wiring between this board and the LEDs will be a significant radiator and must be done with care if the result is intended for sale.
+- High current and frequency PWM may degrade ADC measurements, especially from high-
     impedance sources.
-  - May disrupt RS485 communication, this could render the board
-    non-functional. As yet untested.
-  - May put enough noise onto the power supply so as to severly
-    hinder normal operation.
-- No protection diode for reverse voltage protection at V+!
-- No inductor to reduce radiation onto input power.
-- The best design practices I know for managing these I have used, but
-I am not an EE, I only play one on TV sometimes.
 
 License
 -------
@@ -115,7 +95,7 @@ under the GPL.
 
 > TeensyLED Controller is free software and hardware: you can redistribute
 > it and/or modify it under the terms of the GNU General Public License
-> as published by the Free Software Foundation, either version 3 of the\
+> as published by the Free Software Foundation, either version 3 of the
 > License, or (at your option) any later version.
 > 
 > TeensyLED Controller is distributed in the hope that it will be useful,
@@ -124,4 +104,4 @@ under the GPL.
 > GNU General Public License for more details.
 > 
 > You should have received a copy of the GNU General Public License
-> along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+> along with TeensyLED Controller.  If not, see <http://www.gnu.org/licenses/>.
