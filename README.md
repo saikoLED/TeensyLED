@@ -30,8 +30,6 @@ If you are curious about our other projects, you can visit our [blog](http://blo
 
 Hardware Features
 -----------------
-Targeted features in this Eagle Board design, which is also released
-as open hardware under the same license as this software.
 
 [Schematics and Board Drawings](Eagle Design/TeensyLED.pdf)
 
