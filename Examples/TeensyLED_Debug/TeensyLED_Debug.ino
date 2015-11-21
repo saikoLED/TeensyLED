@@ -15,6 +15,7 @@ void setup() {
   pinMode(greenpin, OUTPUT);
   pinMode(bluepin, OUTPUT);
   pinMode(whitepin, OUTPUT);
+  
   analogWriteFrequency(redpin, PWMfrequency);
   analogWriteFrequency(greenpin, PWMfrequency);
   analogWriteFrequency(bluepin, PWMfrequency);
@@ -25,6 +26,21 @@ void setup() {
   analogWrite(greenpin, 0);
   analogWrite(bluepin, 0);
   analogWrite(whitepin, 0);
+  
+  while(1) {
+    analogWrite(whitepin, 0);
+    analogWrite(redpin, 0xFFFF);
+    delay(500);
+    analogWrite(redpin, 0);
+    analogWrite(greenpin, 0xFFFF);
+    delay(500);
+    analogWrite(greenpin, 0);
+    analogWrite(bluepin, 0xFFFF);
+    delay(500);
+    analogWrite(bluepin, 0);
+    analogWrite(whitepin, 0xFFFF);
+    delay(500);
+  }  
 }
 
 void loop() {

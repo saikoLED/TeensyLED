@@ -32,7 +32,7 @@
 //
 //***************************************************************************
 
-#include "TeensyLED.h"
+#include "LEDs.h"
 #include <DmxReceiver.h>
 
 #define propgain 0.001
@@ -50,12 +50,21 @@ float targetsaturation;
 
 void setup() {
   Serial.begin(115200);
+  float S[3] = {0, 1, 1};
+  float D[3];
+  
+  while(1) {
+    Hsi2Rgb(&D[0], &D[1], &D[2], S[0], S[1], S[2]);
+    Serial.println(String(S[0]) + ", " + String(S[1]) + ", " + String(S[2]) + " -> " + String(D[0]) + ", " + String(D[1]) + ", " + String(D[2]));
+    delay(1000);
+  }
+  
   lamp.begin();
   dmx.begin();
   dmxTimer.begin(dmxTimerISR, 1000);
   
   targethue = 0;
-  targetsaturation = 0.75;
+  targetsaturation = 1.0;
   
   // Initialize light at the target hue, no brightness, fully saturated.
   lamp.setHue(targethue);
@@ -104,4 +113,30 @@ void updatetargetsaturation() {
 
 void dmxTimerISR(void) {
   dmx.bufferService();
+}
+
+void Hsi2Rgb(float *R, float *G, float *B, float H, float S, float I)
+{
+  H -= 360*floor(H/360);
+	
+  if(H < 120)
+  {
+    *B = I*(1 - S);
+    *R = I*(1 + S*cos(H*(M_PI/180))/cos((60 - H)*(M_PI/180)));
+    *G = 3*I - *R - *B;
+  }
+  else if(H < 240)
+  {
+    H -= 120;
+    *R = I*(1 - S);
+    *G = I*(1 + S*cos(H*(M_PI/180))/cos((60 - H)*(M_PI/180)));
+    *B = 3*I - *R - *G;
+  }
+  else
+  {
+    H -= 240;
+    *G = I*(1 - S);
+    *B = I*(1 + S*cos(H*(M_PI/180))/cos((60 - H)*(M_PI/180)));
+    *R = 3*I - *G - *B;
+  }
 }
