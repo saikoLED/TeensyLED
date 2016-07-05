@@ -10,6 +10,11 @@ with a RGBW LED light using Hue, Saturation, and Intensity (HSI)
 mode. Also provided are a basic USB interface example, and an example
 for using the fully isolated DMX interface.
 
+CircuitHub profile created for this board with pre-identified working
+parts.
+
+https://github.com/saikoLED/TeensyLED
+
 ![Board Image](Eagle Design/TeensyLED.png)
 
 Software Features
