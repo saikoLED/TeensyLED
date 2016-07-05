@@ -10,10 +10,12 @@ with a RGBW LED light using Hue, Saturation, and Intensity (HSI)
 mode. Also provided are a basic USB interface example, and an example
 for using the fully isolated DMX interface.
 
-CircuitHub profile created for this board with pre-identified working
-parts.
+CircuitHub design created for this board with pre-identified working
+parts. Licensed under CERN Open Hardware license (http://www.ohwr.org/projects/cernohl) which
+allows for anyone to copy, modify and distribute this design (and products manufactured therefrom) so long
+as they are licensed under identical terms & maintain all copyrights.
 
-https://github.com/saikoLED/TeensyLED
+https://circuithub.com/projects/neltnerb/TeensyLED
 
 ![Board Image](Eagle Design/TeensyLED.png)
 
