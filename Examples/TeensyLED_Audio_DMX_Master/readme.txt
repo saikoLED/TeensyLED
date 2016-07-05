@@ -2,6 +2,9 @@ TeensyLED Audio DMX Master
 Version 0.9
 Copyright Brian Neltner 2016
 
+Video Example Demonstrating Algorithm Functionality with Color Kinetics ColorBlast 12.
+https://www.youtube.com/watch?v=BOnsDaA30Ak
+
 Description:
 
 This program is designed for use with the SaikoLED TeensyLED Driver
